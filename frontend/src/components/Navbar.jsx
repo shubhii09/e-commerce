@@ -9,11 +9,15 @@ import {
   Store,
   Info,
   Phone,
+  Briefcase,
+  Plus,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const closeMenu = () => {
     setMenuOpen(false);
@@ -67,7 +71,7 @@ function Navbar() {
 
               {/* USER */}
               <NavLink
-                to="/login"
+                to={user ? "/profile" : "/login"}
                 className="p-2.5 text-gray-700 hover:text-orange-900 transition"
                 aria-label="User account"
               >
@@ -77,11 +81,12 @@ function Navbar() {
               {/* CART */}
               <NavLink
                 to="/cart"
-                className="p-2.5 text-gray-700 hover:text-blue-600 transition"
+                className="p-2.5 text-gray-700 hover:text-orange-900 transition"
                 aria-label="Shopping cart"
               >
                 <ShoppingCart size={26} strokeWidth={1.8} />
               </NavLink>
+
             </div>
           </div>
         </div>
@@ -101,8 +106,10 @@ function Navbar() {
           menuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
+
         {/* SIDEBAR HEADER */}
         <div className="h-20 px-6 flex items-center justify-between border-b">
+
           <NavLink
             to="/"
             onClick={closeMenu}
@@ -118,17 +125,20 @@ function Navbar() {
           >
             <X size={25} />
           </button>
+
         </div>
 
         {/* SIDEBAR LINKS */}
         <div className="p-5">
 
+          {/* MENU TITLE */}
           <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-4 mb-3">
             Menu
           </p>
 
           <div className="flex flex-col gap-2">
 
+            {/* HOME */}
             <NavLink
               to="/"
               className={navLinkClass}
@@ -138,6 +148,17 @@ function Navbar() {
               <span>Home</span>
             </NavLink>
 
+            {/* NEW */}
+            <NavLink
+              to="/New"
+              className={navLinkClass}
+              onClick={closeMenu}
+            >
+              <Plus size={21} />
+              <span>New</span>
+            </NavLink>
+
+            {/* SHOP */}
             <NavLink
               to="/shop"
               className={navLinkClass}
@@ -147,6 +168,7 @@ function Navbar() {
               <span>Shop</span>
             </NavLink>
 
+            {/* ABOUT */}
             <NavLink
               to="/about"
               className={navLinkClass}
@@ -156,6 +178,7 @@ function Navbar() {
               <span>About Us</span>
             </NavLink>
 
+            {/* CONTACT */}
             <NavLink
               to="/contact"
               className={navLinkClass}
@@ -165,25 +188,38 @@ function Navbar() {
               <span>Contact</span>
             </NavLink>
 
+            {/* OUR WORK */}
+            <NavLink
+              to="/faq"
+              className={navLinkClass}
+              onClick={closeMenu}
+            >
+              <Briefcase size={21} />
+              <span>Our Work</span>
+            </NavLink>
+
           </div>
 
           <div className="border-t my-6" />
 
+          {/* ACCOUNT TITLE */}
           <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-4 mb-3">
             Account
           </p>
 
           <div className="flex flex-col gap-2">
 
+            {/* ACCOUNT / PROFILE */}
             <NavLink
-              to="/login"
+              to={user ? "/profile" : "/login"}
               className={navLinkClass}
               onClick={closeMenu}
             >
               <User size={21} />
-              <span>My Account</span>
+              <span>{user ? "My Profile" : "My Account"}</span>
             </NavLink>
 
+            {/* CART */}
             <NavLink
               to="/cart"
               className={navLinkClass}
@@ -202,6 +238,7 @@ function Navbar() {
             © 2026 Countrees
           </p>
         </div>
+
       </aside>
     </>
   );
