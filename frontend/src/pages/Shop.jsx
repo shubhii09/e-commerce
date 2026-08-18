@@ -9,7 +9,8 @@ import {
 } from "lucide-react";
 
 import products from "../data/product";
-
+import ShopInterior from "../pages/ShopInterior";
+import CountreesInterior from "../pages/CountreesInterior";
 const CATEGORIES = ["Chair", "Sofa", "Table"];
 
 const MATERIALS = [
@@ -508,7 +509,8 @@ const Shop = () => {
 
   return (
     <main className="w-full bg-white text-[#363332]">
-
+            <ShopInterior />
+            <CountreesInterior />
       {/* ==================================
           HEADER / INTRO
       ================================== */}
@@ -613,8 +615,7 @@ const Shop = () => {
         <div className="flex gap-8 lg:gap-10">
 
           {/* DESKTOP FILTER */}
-
-          <div className="hidden md:block w-[220px] lg:w-[250px] shrink-0">
+<div className="hidden md:block w-[220px] lg:w-[250px] shrink-0 self-start sticky top-24">
 
             <FilterSidebar
               selectedCategories={selectedCategories}
@@ -684,7 +685,7 @@ const Shop = () => {
 
       {mobileFilter && (
 
-        <div className="fixed inset-0 z-[100] md:hidden">
+        <div className="fixed  inset-0 z-[100] md:hidden">
 
           {/* BACKDROP */}
 
